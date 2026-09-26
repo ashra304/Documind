@@ -7,7 +7,7 @@ from fastapi import (
     FastAPI,
     File,
     HTTPException,
-    UploadFile
+    UploadFile,
 )
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
@@ -15,7 +15,7 @@ from pydantic import BaseModel
 from src.rag import (
     build_rag_pipeline,
     generate_answer,
-    summarize_document
+    summarize_document,
 )
 
 
@@ -30,12 +30,10 @@ logging.basicConfig(
         "%(levelname)s | "
         "%(name)s | "
         "%(message)s"
-    )
+    ),
 )
 
-logger = logging.getLogger(
-    "documind.api"
-)
+logger = logging.getLogger("documind.api")
 
 
 # --------------------------------------------------
@@ -44,20 +42,42 @@ logger = logging.getLogger(
 
 app = FastAPI(
     title="DocuMind API",
-    description=(
-        "Multi-document RAG intelligence platform."
-    ),
-    version="1.0.0"
+    description="Multi-document RAG intelligence platform.",
+    version="1.0.0",
 )
+
+
+# --------------------------------------------------
+# CORS
+# --------------------------------------------------
+
+# Local development is always allowed.
+# A deployed frontend URL can be supplied through:
+#
+# FRONTEND_URL=https://your-frontend-domain.com
+#
+# Multiple URLs can be supplied separated by commas.
+
+frontend_url = os.getenv("FRONTEND_URL", "").strip()
+
+allowed_origins = [
+    "http://localhost:5173",
+    "http://127.0.0.1:5173",
+]
+
+if frontend_url:
+    allowed_origins.extend(
+        origin.strip()
+        for origin in frontend_url.split(",")
+        if origin.strip()
+    )
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-        "http://localhost:5173"
-    ],
+    allow_origins=allowed_origins,
     allow_credentials=True,
     allow_methods=["*"],
-    allow_headers=["*"]
+    allow_headers=["*"],
 )
 
 
@@ -74,12 +94,12 @@ BASE_DIR = os.path.dirname(
 documents_folder = os.path.join(
     BASE_DIR,
     "data",
-    "documents"
+    "documents",
 )
 
 os.makedirs(
     documents_folder,
-    exist_ok=True
+    exist_ok=True,
 )
 
 
@@ -89,7 +109,7 @@ os.makedirs(
 
 logger.info(
     "DocuMind documents folder: %s",
-    documents_folder
+    documents_folder,
 )
 
 vector_store = build_rag_pipeline(
@@ -127,31 +147,28 @@ def root():
     return {
         "name": "DocuMind",
         "status": "running",
-        "version": "1.0.0"
+        "version": "1.0.0",
     }
 
 
 @app.get("/health")
 def health():
-
     if vector_store is None:
         return {
             "status": "unhealthy",
-            "vector_store": False
+            "vector_store": False,
         }
 
     return {
         "status": "healthy",
         "vector_store": True,
-        "chunks": len(
-            vector_store.chunks
-        ),
+        "chunks": len(vector_store.chunks),
         "documents": len(
             {
                 chunk["document"]
                 for chunk in vector_store.chunks
             }
-        )
+        ),
     }
 
 
@@ -161,32 +178,26 @@ def health():
 
 @app.get("/documents")
 def get_documents():
-
     documents = []
 
     for filename in sorted(
         os.listdir(documents_folder)
     ):
-
-        if not filename.lower().endswith(
-            ".pdf"
-        ):
+        if not filename.lower().endswith(".pdf"):
             continue
 
         file_path = os.path.join(
             documents_folder,
-            filename
+            filename,
         )
 
         documents.append({
             "filename": filename,
-            "size": os.path.getsize(
-                file_path
-            )
+            "size": os.path.getsize(file_path),
         })
 
     return {
-        "documents": documents
+        "documents": documents,
     }
 
 
@@ -196,7 +207,6 @@ def get_documents():
 
 @app.post("/query")
 def query(request: QueryRequest):
-
     global vector_store
 
     question = request.question.strip()
@@ -204,13 +214,13 @@ def query(request: QueryRequest):
     if not question:
         raise HTTPException(
             status_code=400,
-            detail="Question cannot be empty."
+            detail="Question cannot be empty.",
         )
 
     if vector_store is None:
         raise HTTPException(
             status_code=503,
-            detail="RAG system is not ready."
+            detail="RAG system is not ready.",
         )
 
     session_id = (
@@ -220,31 +230,29 @@ def query(request: QueryRequest):
 
     history = chat_sessions.get(
         session_id,
-        []
+        [],
     )
 
     try:
-
         result = generate_answer(
             vector_store,
             question,
             chat_history=history,
-            document_name=request.document_name
+            document_name=request.document_name,
         )
 
-        # Store the conversation for
-        # subsequent questions.
+        # Store conversation for subsequent questions.
         history.append({
             "role": "user",
-            "content": question
+            "content": question,
         })
 
         history.append({
             "role": "assistant",
             "content": result.get(
                 "answer",
-                ""
-            )
+                "",
+            ),
         })
 
         # Keep memory bounded.
@@ -256,17 +264,14 @@ def query(request: QueryRequest):
         return result
 
     except Exception as error:
-
         logger.exception(
             "Query failed: %s",
-            error
+            error,
         )
 
         raise HTTPException(
             status_code=500,
-            detail=(
-                "Failed to generate an answer."
-            )
+            detail="Failed to generate an answer.",
         )
 
 
@@ -276,110 +281,97 @@ def query(request: QueryRequest):
 
 @app.post("/upload")
 def upload_document(
-    file: UploadFile = File(...)
+    file: UploadFile = File(...),
 ):
-
     global vector_store
 
     if not file.filename:
         raise HTTPException(
             status_code=400,
-            detail="No filename provided."
+            detail="No filename provided.",
         )
 
     filename = os.path.basename(
-        file.filename
+        file.filename,
     )
 
     if filename != file.filename:
         raise HTTPException(
             status_code=400,
-            detail="Invalid filename."
+            detail="Invalid filename.",
         )
 
-    if not filename.lower().endswith(
-        ".pdf"
-    ):
+    if not filename.lower().endswith(".pdf"):
         raise HTTPException(
             status_code=400,
-            detail="Only PDF files are supported."
+            detail="Only PDF files are supported.",
         )
 
     destination = os.path.join(
         documents_folder,
-        filename
+        filename,
     )
 
     # Prevent accidentally deleting an existing
-    # document if a replacement upload fails.
+    # document if replacement indexing fails.
     backup_path = destination + ".backup"
 
     try:
-
         if os.path.exists(destination):
-
             shutil.copy2(
                 destination,
-                backup_path
+                backup_path,
             )
 
         with open(
             destination,
-            "wb"
+            "wb",
         ) as output:
-
             shutil.copyfileobj(
                 file.file,
-                output
+                output,
             )
 
         logger.info(
             "Uploaded document: %s",
-            filename
+            filename,
         )
 
         vector_store = build_rag_pipeline(
             documents_folder,
-            force_rebuild=False
+            force_rebuild=False,
         )
 
         if os.path.exists(backup_path):
             os.remove(backup_path)
 
         return {
-            "message":
-                "Document uploaded successfully.",
-            "filename":
-                filename
+            "message": "Document uploaded successfully.",
+            "filename": filename,
         }
 
     except Exception as error:
-
         logger.exception(
             "Upload failed: %s",
-            error
+            error,
         )
 
         # Restore previous version if one existed.
         if os.path.exists(backup_path):
-
             if os.path.exists(destination):
                 os.remove(destination)
 
             os.replace(
                 backup_path,
-                destination
+                destination,
             )
 
         elif os.path.exists(destination):
-
             os.remove(destination)
 
         raise HTTPException(
             status_code=500,
-            detail=(
-                "Document upload or indexing failed."
-            )
+            detail="Document upload or indexing failed.",
         )
 
 
@@ -387,72 +379,61 @@ def upload_document(
 # Delete
 # --------------------------------------------------
 
-@app.delete(
-    "/documents/{document_name}"
-)
+@app.delete("/documents/{document_name}")
 def delete_document(
-    document_name: str
+    document_name: str,
 ):
-
     global vector_store
 
     filename = os.path.basename(
-        document_name
+        document_name,
     )
 
     if filename != document_name:
         raise HTTPException(
             status_code=400,
-            detail="Invalid document name."
+            detail="Invalid document name.",
         )
 
-    if not filename.lower().endswith(
-        ".pdf"
-    ):
+    if not filename.lower().endswith(".pdf"):
         raise HTTPException(
             status_code=400,
-            detail="Only PDF documents can be deleted."
+            detail="Only PDF documents can be deleted.",
         )
 
     file_path = os.path.join(
         documents_folder,
-        filename
+        filename,
     )
 
     if not os.path.exists(file_path):
         raise HTTPException(
             status_code=404,
-            detail="Document not found."
+            detail="Document not found.",
         )
 
     try:
-
-        os.remove(
-            file_path
-        )
+        os.remove(file_path)
 
         logger.info(
             "Deleted document: %s",
-            filename
+            filename,
         )
 
         vector_store = build_rag_pipeline(
             documents_folder,
-            force_rebuild=False
+            force_rebuild=False,
         )
 
         return {
-            "message":
-                "Document deleted successfully.",
-            "filename":
-                filename
+            "message": "Document deleted successfully.",
+            "filename": filename,
         }
 
     except Exception as error:
-
         logger.exception(
             "Delete failed: %s",
-            error
+            error,
         )
 
         raise HTTPException(
@@ -460,7 +441,7 @@ def delete_document(
             detail=(
                 "Document deletion or "
                 "re-indexing failed."
-            )
+            ),
         )
 
 
@@ -470,62 +451,55 @@ def delete_document(
 
 @app.post("/summarize")
 def summarize(
-    request: SummarizeRequest
+    request: SummarizeRequest,
 ):
-
     global vector_store
 
     filename = os.path.basename(
-        request.document_name
+        request.document_name,
     )
 
     if filename != request.document_name:
         raise HTTPException(
             status_code=400,
-            detail="Invalid document name."
+            detail="Invalid document name.",
         )
 
-    if not filename.lower().endswith(
-        ".pdf"
-    ):
+    if not filename.lower().endswith(".pdf"):
         raise HTTPException(
             status_code=400,
-            detail="Only PDF documents are supported."
+            detail="Only PDF documents are supported.",
         )
 
     file_path = os.path.join(
         documents_folder,
-        filename
+        filename,
     )
 
     if not os.path.exists(file_path):
         raise HTTPException(
             status_code=404,
-            detail="Document not found."
+            detail="Document not found.",
         )
 
     try:
-
         summary = summarize_document(
             vector_store,
-            filename
+            filename,
         )
 
         return {
             "document": filename,
-            "summary": summary
+            "summary": summary,
         }
 
     except Exception as error:
-
         logger.exception(
             "Summarization failed: %s",
-            error
+            error,
         )
 
         raise HTTPException(
             status_code=500,
-            detail=(
-                "Failed to summarize document."
-            )
+            detail="Failed to summarize document.",
         )
