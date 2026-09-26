@@ -1,0 +1,316 @@
+{
+  "timestamp": "2026-09-26T09:14:20.379429",
+  "total_questions": 10,
+  "retrieval": {
+    "hit_at_1": 0.8,
+    "hit_at_3": 1.0,
+    "average_similarity": 0.5666772782802582
+  },
+  "answer_quality": {
+    "groundedness": 0.5,
+    "relevance": 0.5,
+    "coverage": 0.5
+  },
+  "results": [
+    {
+      "question": "What is a distributed system?",
+      "expected_document": "Types_distributed_systems.pdf",
+      "retrieved_documents": [
+        {
+          "document": "03_System Architecture.pdf",
+          "page": 12,
+          "similarity": 0.6491801738739014
+        },
+        {
+          "document": "Types_distributed_systems.pdf",
+          "page": 11,
+          "similarity": 0.6432809829711914
+        },
+        {
+          "document": "03_System Architecture.pdf",
+          "page": 26,
+          "similarity": 0.6124429702758789
+        }
+      ],
+      "hit_at_1": false,
+      "hit_at_3": true,
+      "answer": "The information is not available.",
+      "answer_evaluation": {
+        "grounded": false,
+        "relevance": 0,
+        "coverage": 0,
+        "reason": "Evaluator returned invalid JSON."
+      }
+    },
+    {
+      "question": "What are the different types of distributed systems?",
+      "expected_document": "Types_distributed_systems.pdf",
+      "retrieved_documents": [
+        {
+          "document": "Types_distributed_systems.pdf",
+          "page": 2,
+          "similarity": 0.6504396200180054
+        },
+        {
+          "document": "Types_distributed_systems.pdf",
+          "page": 11,
+          "similarity": 0.61479651927948
+        },
+        {
+          "document": "03_System Architecture.pdf",
+          "page": 26,
+          "similarity": 0.5957348346710205
+        }
+      ],
+      "hit_at_1": true,
+      "hit_at_3": true,
+      "answer": "User Safety: safe",
+      "answer_evaluation": {
+        "grounded": false,
+        "relevance": 0,
+        "coverage": 0,
+        "reason": "Evaluator returned invalid JSON."
+      }
+    },
+    {
+      "question": "What is an actuator?",
+      "expected_document": "4_actuators.pptx.pdf",
+      "retrieved_documents": [
+        {
+          "document": "4_actuators.pptx.pdf",
+          "page": 1,
+          "similarity": 0.8550859093666077
+        },
+        {
+          "document": "4_actuators.pptx.pdf",
+          "page": 2,
+          "similarity": 0.7682138681411743
+        },
+        {
+          "document": "4_actuators.pptx.pdf",
+          "page": 3,
+          "similarity": 0.6702442169189453
+        }
+      ],
+      "hit_at_1": true,
+      "hit_at_3": true,
+      "answer": "Based on the provided context, an actuator is defined as:\n\n**A device that converts the effective change in the environment sensed in the form of electrical energy into some other form of energy.**\n\nThe context also notes that actuators are classified into Electrical, Hydraulic, and Pneumatic types based on their operation. No further details beyond this definition or classification are provided in the documents.",
+      "answer_evaluation": {
+        "grounded": true,
+        "relevance": 1,
+        "coverage": 1,
+        "reason": "The answer directly quotes the definition of an actuator from the retrieved context and includes the classification into Electrical, Hydraulic, and Pneumatic types. It accurately reflects the information available in the context without adding unsupported claims."
+      }
+    },
+    {
+      "question": "What are the different types of actuators?",
+      "expected_document": "4_actuators.pptx.pdf",
+      "retrieved_documents": [
+        {
+          "document": "4_actuators.pptx.pdf",
+          "page": 1,
+          "similarity": 0.8395274877548218
+        },
+        {
+          "document": "4_actuators.pptx.pdf",
+          "page": 20,
+          "similarity": 0.6753749251365662
+        },
+        {
+          "document": "4_actuators.pptx.pdf",
+          "page": 5,
+          "similarity": 0.6286240816116333
+        }
+      ],
+      "hit_at_1": true,
+      "hit_at_3": true,
+      "answer": "The provided context does not explicitly list the different types of actuators (e.g., electrical, hydraulic, pneumatic). It only mentions **electrical actuators** in examples (Page 5) and applications of **linear actuators** (Page 20), but does not categorize actuator types generally. The information required to answer the question is not available in the given documents.",
+      "answer_evaluation": {
+        "grounded": false,
+        "relevance": 0,
+        "coverage": 0,
+        "reason": "The answer claims the context lacks actuator type information, but the context does mention electrical and linear actuators, so it is not grounded; it also does not directly answer the question."
+      }
+    },
+    {
+      "question": "What is a system architecture?",
+      "expected_document": "03_System Architecture.pdf",
+      "retrieved_documents": [
+        {
+          "document": "03_System Architecture.pdf",
+          "page": 2,
+          "similarity": 0.7627561092376709
+        },
+        {
+          "document": "03_System Architecture.pdf",
+          "page": 1,
+          "similarity": 0.5762107968330383
+        },
+        {
+          "document": "03_System Architecture.pdf",
+          "page": 7,
+          "similarity": 0.5419672131538391
+        }
+      ],
+      "hit_at_1": true,
+      "hit_at_3": true,
+      "answer": "\n\nBased on the provided context, a system architecture is defined as an instance of a software architecture that results from deciding the software components, their interaction, and their placement.",
+      "answer_evaluation": {
+        "grounded": true,
+        "relevance": 1,
+        "coverage": 1,
+        "reason": "The answer directly defines a system architecture as an instance of a software architecture resulting from decisions about software components, their interactions, and their placement, which is the core definition provided in the retrieved context."
+      }
+    },
+    {
+      "question": "What are the components of a system architecture?",
+      "expected_document": "03_System Architecture.pdf",
+      "retrieved_documents": [
+        {
+          "document": "03_System Architecture.pdf",
+          "page": 2,
+          "similarity": 0.7205569744110107
+        },
+        {
+          "document": "03_System Architecture.pdf",
+          "page": 1,
+          "similarity": 0.5576634407043457
+        },
+        {
+          "document": "03_System Architecture.pdf",
+          "page": 7,
+          "similarity": 0.5414751172065735
+        }
+      ],
+      "hit_at_1": true,
+      "hit_at_3": true,
+      "answer": "According to the provided context, a system architecture consists of:\n\n- **Software components, their interaction, and their placement** – deciding these elements creates an instance of a software (system) architecture.  \n- **Organizational styles** – the architecture can be **centralized**, **decentralized**, or **hybrid**.  \n- **Multi‑tiered layers** (when applicable):  \n  1. **User‑interface layer**  \n  2. **Processing layer**  \n  3. **Data layer**  \n- **Machine types** that host these layers:  \n  - **Client machine** (runs the user‑interface programs)  \n  - **Server machine** (runs the processing and data programs)  \n\nThese items together constitute the components of a system architecture as described in the document.",
+      "answer_evaluation": {
+        "grounded": true,
+        "relevance": 1,
+        "coverage": 1,
+        "reason": "The answer accurately captures all components mentioned in the context: software components/interaction/placement, organizational styles (centralized, decentralized, hybrid), multi-tiered layers (UI, processing, data), and machine types (client/server)."
+      }
+    },
+    {
+      "question": "What is Retrieval Augmented Generation?",
+      "expected_document": "Top 20 AI Projects and Tools.pdf",
+      "retrieved_documents": [
+        {
+          "document": "Top 20 AI Projects and Tools.pdf",
+          "page": 2,
+          "similarity": 0.40445733070373535
+        },
+        {
+          "document": "Top 20 AI Projects and Tools.pdf",
+          "page": 7,
+          "similarity": 0.3750588893890381
+        },
+        {
+          "document": "Top 20 AI Projects and Tools.pdf",
+          "page": 10,
+          "similarity": 0.3397422730922699
+        }
+      ],
+      "hit_at_1": true,
+      "hit_at_3": true,
+      "answer": "The provided context does not contain a definition or explanation of Retrieval Augmented Generation (RAG). It only mentions \"RAG Component\" briefly in the context of a Personalized Learning Path Generator project, describing it as \"A RAG index containing all institutional educational content (textbooks, lecture videos, practice problems), allowing retrieval of the most appropriate prerequisite and next-ste[...]\"\n\nThe information about what Retrieval Augmented Generation is, how it works, or its general principles is not available in the given context.",
+      "answer_evaluation": {
+        "grounded": true,
+        "relevance": 0,
+        "coverage": 1,
+        "reason": "The answer correctly notes that the context lacks a definition of RAG but does not actually answer what Retrieval Augmented Generation is, making it irrelevant to the question despite being grounded in the context and covering available information."
+      }
+    },
+    {
+      "question": "What are some AI project ideas?",
+      "expected_document": "Top 20 AI Projects and Tools.pdf",
+      "retrieved_documents": [
+        {
+          "document": "4_actuators.pptx.pdf",
+          "page": 11,
+          "similarity": 0.40247642993927
+        },
+        {
+          "document": "4_actuators.pptx.pdf",
+          "page": 30,
+          "similarity": 0.33332931995391846
+        },
+        {
+          "document": "Top 20 AI Projects and Tools.pdf",
+          "page": 2,
+          "similarity": 0.3317004442214966
+        }
+      ],
+      "hit_at_1": false,
+      "hit_at_3": true,
+      "answer": "Based on the provided context, the information is not available to answer your question about AI project ideas. The documents primarily discuss servo motor applications and IoT examples. The only AI-related content mentions an \"Al Agent Component (Curriculum Agent)\" that uses RAG and LLMs for assessment, planning, and content synthesis, but it does not list any AI project ideas.",
+      "answer_evaluation": {
+        "grounded": true,
+        "relevance": 1,
+        "coverage": 1,
+        "reason": "The answer accurately reflects the context by noting the absence of AI project ideas and summarizing the available content."
+      }
+    },
+    {
+      "question": "What are the main topics discussed in the AI projects document?",
+      "expected_document": "Top 20 AI Projects and Tools.pdf",
+      "retrieved_documents": [
+        {
+          "document": "Top 20 AI Projects and Tools.pdf",
+          "page": 2,
+          "similarity": 0.3920498490333557
+        },
+        {
+          "document": "Top 20 AI Projects and Tools.pdf",
+          "page": 1,
+          "similarity": 0.36565691232681274
+        },
+        {
+          "document": "Top 20 AI Projects and Tools.pdf",
+          "page": 12,
+          "similarity": 0.3314161002635956
+        }
+      ],
+      "hit_at_1": true,
+      "hit_at_3": true,
+      "answer": "Based on the excerpts from the “Top 20 AI Projects and Tools.pdf”, the document’s main discussion topics include:\n\n1. **AI Agents for Curriculum & Learning** – specifically the **Assessment Agent** (runs quizzes and identifies gaps), the **Planner Agent** (creates structured learning plans), and the **Content Synthesis Agent** (pulls multiple documents and uses an LLM to synthesize difficult topics).\n\n2. **AI Agents for Risk Assessment & Research Analysis** – an agent that takes outputs from research and document‑analysis components to generate a comprehensive, cited risk‑assessment report on a target company, employing multi‑step reasoning and source selection.\n\n3. **AI Agents for Dynamic IT Support & Triage** – an autonomous, evidence‑based IT operations agent aimed at resolving complex IT issues without requiring Level‑1 human support.\n\n4. **AI‑Driven Anomaly Detection & Behavioral Analytics** – a pipeline that collects normal behavior data (e.g., API calls, network traffic, file‑system access), encodes it into numerical vectors, and trains unsupervised models such as autoencoders or Isolation Forests to detect anomalies in new executables.\n\nThese four areas—educational/curriculum AI agents, risk‑assessment/research AI agents, IT‑operations AI agents, and unsupervised anomaly‑detection tools—represent the principal topics covered in the document.",
+      "answer_evaluation": {
+        "grounded": false,
+        "relevance": 0,
+        "coverage": 0,
+        "reason": "Evaluator returned invalid JSON."
+      }
+    },
+    {
+      "question": "What are the characteristics of distributed systems?",
+      "expected_document": "Types_distributed_systems.pdf",
+      "retrieved_documents": [
+        {
+          "document": "Types_distributed_systems.pdf",
+          "page": 11,
+          "similarity": 0.647515058517456
+        },
+        {
+          "document": "03_System Architecture.pdf",
+          "page": 26,
+          "similarity": 0.5896996259689331
+        },
+        {
+          "document": "Types_distributed_systems.pdf",
+          "page": 2,
+          "similarity": 0.5836408734321594
+        }
+      ],
+      "hit_at_1": true,
+      "hit_at_3": true,
+      "answer": "The information you’re looking for is not available in the provided context.",
+      "answer_evaluation": {
+        "grounded": false,
+        "relevance": 1,
+        "coverage": 0,
+        "reason": "The answer claims the information is unavailable, but the context does contain relevant details about distributed systems including three types and characteristics of collaborative distributed systems."
+      }
+    }
+  ]
+}

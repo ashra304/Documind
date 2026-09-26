@@ -1,0 +1,62 @@
+# =========================
+# Environment & secrets
+# =========================
+.env
+.env.*
+!.env.example
+
+# =========================
+# Python
+# =========================
+.venv/
+venv/
+env/
+
+__pycache__/
+*.py[cod]
+*$py.class
+
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# =========================
+# Generated data
+# =========================
+vector_store/
+data/vector_store/
+
+*.pkl
+*.faiss
+
+# =========================
+# Logs
+# =========================
+logs/
+*.log
+
+# =========================
+# Node / React
+# =========================
+node_modules/
+frontend/node_modules/
+
+dist/
+build/
+frontend/dist/
+
+.npm/
+.eslintcache
+
+# =========================
+# IDE / Editor
+# =========================
+.vscode/
+.idea/
+
+# =========================
+# OS files
+# =========================
+.DS_Store
+Thumbs.db
+desktop.ini

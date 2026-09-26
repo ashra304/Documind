@@ -1,0 +1,42 @@
+[
+  {
+    "question": "What is a distributed system?",
+    "expected_document": "Types_distributed_systems.pdf"
+  },
+  {
+    "question": "What are the different types of distributed systems?",
+    "expected_document": "Types_distributed_systems.pdf"
+  },
+  {
+    "question": "What is an actuator?",
+    "expected_document": "4_actuators.pptx.pdf"
+  },
+  {
+    "question": "What are the different types of actuators?",
+    "expected_document": "4_actuators.pptx.pdf"
+  },
+  {
+    "question": "What is a system architecture?",
+    "expected_document": "03_System Architecture.pdf"
+  },
+  {
+    "question": "What are the components of a system architecture?",
+    "expected_document": "03_System Architecture.pdf"
+  },
+  {
+    "question": "What is Retrieval Augmented Generation?",
+    "expected_document": "Top 20 AI Projects and Tools.pdf"
+  },
+  {
+    "question": "What are some AI project ideas?",
+    "expected_document": "Top 20 AI Projects and Tools.pdf"
+  },
+  {
+    "question": "What are the main topics discussed in the AI projects document?",
+    "expected_document": "Top 20 AI Projects and Tools.pdf"
+  },
+  {
+    "question": "What are the characteristics of distributed systems?",
+    "expected_document": "Types_distributed_systems.pdf"
+  }
+]
