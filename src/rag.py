@@ -264,7 +264,7 @@ def generate_answer(
     # Build document context
     context_parts = []
 
-    for result in results:
+    for result in retrieved_chunks:
 
         context_parts.append(
             f"Source: {result['document']}\n"
