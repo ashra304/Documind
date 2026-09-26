@@ -8,6 +8,12 @@ Instead of sending an entire document to an LLM, DocuMind retrieves the most rel
 
 ---
 
+## Screenshots
+
+### DocuMind Dashboard
+
+![DocuMind Dashboard](docs/images/01-dashboard.png)
+
 ## ✨ Features
 
 - 📄 Multi-document PDF ingestion
